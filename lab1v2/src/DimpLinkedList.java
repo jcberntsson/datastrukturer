@@ -185,9 +185,15 @@ public class DimpLinkedList {
     /**
      * Calculates the initial important measure for all nodes.
      * Assume there are at least 3 nodes otherwise it's all meaningless.
+     * @precon the list has at least 2 elements
      */
     public void calcInitialImportance() {
-        ;
+        Node tmp = head;
+        // While the next node isn't the tail, continue with calculating importance
+        while(tmp.next != tail){
+            tmp.next.imp = importanceOfP(tmp.p, tmp.next.p, tmp.next.next.p);
+            tmp = tmp.next;
+        }
     }
 
     /**
