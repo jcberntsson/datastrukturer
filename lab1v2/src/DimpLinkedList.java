@@ -166,20 +166,21 @@ public class DimpLinkedList {
 
     /**
      * Adds a point to the end of the list
-     *
      * @param p point to add
      */
     public void addLast(Point p) {
 	    Node newLast = new Node(p, size++);
 	    newLast.prev = tail;
+        // If the tail has been set, add the new node as its next node
         if(tail != null){
             tail.next = newLast;
         }
-	    if(tail == null && head == null) {
+        // If head hasn't been set, set the new node as head
+	    if(head == null) {
 		    head = newLast;
 	    }
 	    tail = newLast;
-    } // end addLast
+    }
 
     /**
      * Reduces the list to the sought-after k most important points.
@@ -187,23 +188,38 @@ public class DimpLinkedList {
      */
     public void importanceRemoveList(int k) {
         calcInitialImportance();
+        // Add all elements to the priority queue
         Node tmp = head;
         while(tmp != null){
             q.add(tmp);
             tmp = tmp.next;
         }
+        // Loop through the queue until the size is k
         while(size > k){
             Node leastImp = q.poll();
-            leastImp.prev.next = leastImp.next;
-            leastImp.next.prev = leastImp.prev;
-            size--;
+            removeNode(leastImp);
             calcImportance(leastImp.prev);
             calcImportance(leastImp.next);
+            updateQueue(leastImp);
         }
         q.clear();
     }
 
+    private void updateQueue(Node n){
+        q.remove(n.prev);
+        q.remove(n.next);
+        q.add(n.prev);
+        q.add(n.next);
+    }
+
+    private void removeNode(Node n){
+        n.prev.next = n.next;
+        n.next.prev = n.prev;
+        size--;
+    }
+
     private void calcImportance(Node n){
+        // If the node isn't the had or tail, calc importance
         if(n != head && n != tail){
             n.imp = importanceOfP(n.prev.p, n.p, n.next.p);
         }
