@@ -195,6 +195,7 @@ public class DimpLinkedList {
             tmp = tmp.next;
         }
         // Loop through the queue until the size is k
+	    System.out.println(this.toString());
         while(size > k){
             Node leastImp = q.poll();
             removeNode(leastImp);
