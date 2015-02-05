@@ -6,6 +6,7 @@ kommer ha väntevärde n/2 som ger en loop med n/2 steg vilket resulterar i O(n)
 I länkade listan är ett liknande problem, här tar det tid att hitta den, O(n), men
 konstant tid för att ta bort den O(k). Tvärt om som för fältet.
 
+
 b)
 /**
  * Adds a point to the end of the list
@@ -82,6 +83,11 @@ public void calcInitialImportance() {
     }
 }
 
+
+/*
+När vi testkör programmet så matchar den exakt den i PDFen om vi inverterar radnummrena i fig1.txt.
+Vi har även testkört med hästen och katten och det fungerar bra.
+*/
 
 
 c)
