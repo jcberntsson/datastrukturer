@@ -199,6 +199,13 @@ public class DimpLinkedList {
         while(size > k){
             Node leastImp = q.poll();
             removeNode(leastImp);
+            while(q.peek().imp == leastImp.imp){
+                Node leastImp2 = q.poll();
+                removeNode(leastImp2);
+                calcImportance(leastImp2.prev);
+                calcImportance(leastImp2.next);
+                updateQueue(leastImp2);
+            }
             calcImportance(leastImp.prev);
             calcImportance(leastImp.next);
             updateQueue(leastImp);

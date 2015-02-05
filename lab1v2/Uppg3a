@@ -85,5 +85,5 @@ public void calcInitialImportance() {
 
 
 c)
-Eftersom man måste arrangera om prioritetskön (med add och remove) så kommer det ändå ta O(n).
+Eftersom man måste arrangera om prioritetskön (remove(Object o)) så kommer det ändå ta O(n).
 Pga att kön måste traversera genom element för att hitta och ta bort i remove.
