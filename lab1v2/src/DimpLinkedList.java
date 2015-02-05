@@ -170,7 +170,12 @@ public class DimpLinkedList {
      * @param p point to add
      */
     public void addLast(Point p) {
-        ;
+	    Node newLast = new Node(p, 0);
+	    newLast.next = tail;
+	    if(tail == null && head == null) {
+		    head = newLast;
+	    }
+	    tail = newLast;
     } // end addLast
 
     /**
