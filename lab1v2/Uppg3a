@@ -1,0 +1,89 @@
+a)
+När man tar bort ett element ur ett fält så skapas ett "tomrum". Detta måste fyllas genom att
+flytta element som kommer efter tomrummet ett steg till vänster. Antal element att flytta
+kommer ha väntevärde n/2 som ger en loop med n/2 steg vilket resulterar i O(n).
+
+I länkade listan är ett liknande problem, här tar det tid att hitta den, O(n), men
+konstant tid för att ta bort den O(k). Tvärt om som för fältet.
+
+b)
+/**
+ * Adds a point to the end of the list
+ * @param p point to add
+ */
+public void addLast(Point p) {
+    Node newLast = new Node(p, size++);
+    newLast.prev = tail;
+    // If the tail has been set, add the new node as its next node
+    if(tail != null){
+        tail.next = newLast;
+    }
+    // If head hasn't been set, set the new node as head
+    if(head == null) {
+        head = newLast;
+    }
+    tail = newLast;
+}
+
+/**
+ * Reduces the list to the sought-after k most important points.
+ * @param k the number of remaining points
+ */
+public void importanceRemoveList(int k) {
+    calcInitialImportance();
+    // Add all elements to the priority queue
+    Node tmp = head;
+    while(tmp != null){
+        q.add(tmp);
+        tmp = tmp.next;
+    }
+    // Loop through the queue until the size is k
+    while(size > k){
+        Node leastImp = q.poll();
+        removeNode(leastImp);
+        calcImportance(leastImp.prev);
+        calcImportance(leastImp.next);
+        updateQueue(leastImp);
+    }
+    q.clear();
+}
+
+private void updateQueue(Node n){
+    q.remove(n.prev);
+    q.remove(n.next);
+    q.add(n.prev);
+    q.add(n.next);
+}
+
+private void removeNode(Node n){
+    n.prev.next = n.next;
+    n.next.prev = n.prev;
+    size--;
+}
+
+private void calcImportance(Node n){
+    // If the node isn't the had or tail, calc importance
+    if(n != head && n != tail){
+        n.imp = importanceOfP(n.prev.p, n.p, n.next.p);
+    }
+}
+
+/**
+ * Calculates the initial important measure for all nodes.
+ * Assume there are at least 3 nodes otherwise it's all meaningless.
+ * @precon the list has at least 2 elements
+ */
+public void calcInitialImportance() {
+    Node tmp = head;
+    // While the next node isn't the tail, continue with calculating importance
+    while(tmp.next != tail){
+        calcImportance(tmp.next);
+        tmp = tmp.next;
+    }
+}
+
+
+
+c)
+Eftersom man måste arrangera om prioritetskön (med add och remove) så kommer det ändå ta O(n).
+Pga att kön måste traversera genom element för att hitta och ta bort i remove.
