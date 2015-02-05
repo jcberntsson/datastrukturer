@@ -170,7 +170,7 @@ public class DimpLinkedList {
      * @param p point to add
      */
     public void addLast(Point p) {
-	    Node newLast = new Node(p, 0);
+	    Node newLast = new Node(p, size++);
 	    newLast.next = tail;
 	    if(tail == null && head == null) {
 		    head = newLast;
@@ -184,7 +184,23 @@ public class DimpLinkedList {
      * @param k the number of remaining points
      */
     public void importanceRemoveList(int k) {
-        ;
+        calcInitialImportance();
+        Node tmp = head;
+        while(tmp.next != tail){
+            q.add(tmp);
+            tmp = tmp.next;
+        }
+        while(size > k){
+            Node leastImp = q.poll();
+            leastImp.prev.next = leastImp.next;
+            leastImp.next.prev = leastImp.prev;
+            calcImportance(leastImp.prev);
+            calcImportance(leastImp.next);
+        }
+    }
+
+    private void calcImportance(Node n){
+        n.imp = importanceOfP(n.prev.p, n.p, n.next.p);
     }
 
     /**
