@@ -9,6 +9,7 @@
 *.ear
 
 # Intellij #
+*/.idea/
 .idea/
 *.iml
 *.iws
