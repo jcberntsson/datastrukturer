@@ -1,3 +1,4 @@
+/*
 import java.awt.event.*;
 import java.io.*;
 import java.text.*;
@@ -10,6 +11,7 @@ import java.awt.Container;
 import datastructures.*;
 import testSortCol.*;
 
+*/
 /**
  * Detta �r en frame varmed man kan testa olika sorterade samlingar.
  * Via framen kan man v�lja en textfil, f�r vilken man kan skapa
@@ -18,14 +20,17 @@ import testSortCol.*;
  * beh�vs av de ord som ing�r i texten. Efter ber�kningen
  * presenteras antalet j�mf�relser av nycklar som beh�vdes, den tid
  * det tog och hela referenslistan.
- */
+ *//*
+
 public class TestFrame extends JFrame implements ActionListener {
 
   Scanner textfil = new Scanner( System.in );
   File indata = null;
   JFileChooser texten = new JFileChooser(".");
 
-    /*  ***** H�r skall ni definiera era samlingar !!!  ***** */   
+    */
+/*  ***** H�r skall ni definiera era samlingar !!!  ***** *//*
+
    
     CollectionWithGet<TestMapWithCounter.TestMapEntry<String,List<Integer>>>
 	containerSLC   =   ,
@@ -33,7 +38,9 @@ public class TestFrame extends JFrame implements ActionListener {
         containerAVL   =   ,
         containerSplay =   ;
     
-    /*    **************************************************  */   
+    */
+/*    **************************************************  *//*
+
 
   TestMapWithCounter<String,List<Integer>> slcMap =
      new TestMapWithCounter<String,List<Integer>>(containerSLC);
@@ -174,3 +181,4 @@ public class TestFrame extends JFrame implements ActionListener {
     new TestFrame();
   }
 }
+*/
