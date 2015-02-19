@@ -110,6 +110,10 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
         zigZig(root);
     }
 
+	public void testZagZag() {
+		zagZag(root);
+	}
+
     /* Rotera 1 steg i h�gervarv, dvs zag
                x'                 y'
               / \                / \
@@ -217,30 +221,32 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 		g.element = x.element;
 		x.element = e;
 
+		Entry tmp = g;
+		g = x;
+		x = tmp;
+
 		p.left = g.right;
 		if(p.left != null) {
 			p.left.parent = p;
 		}
-		x.right = x.left;
-		if(x.left != null) {
-			x.left.parent = x;
-		}
-
-		g.right = x.left;
+		g.right = x.right;
 		if(g.right != null) {
 			g.right.parent = g;
+		}
+
+		x.right = x.left;
+		if(x.right != null) {
+			x.right.parent = x;
 		}
 
 		x.left = g.left;
 		if(x.left != null) {
 			x.left.parent = x;
 		}
-
 		g.left = p.right;
 		if(g.left != null) {
 			g.left.parent = g;
 		}
-
 		p.right = g;
 		g.parent = p;
 	}
