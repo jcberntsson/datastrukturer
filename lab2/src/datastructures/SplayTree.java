@@ -25,10 +25,45 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
                 return find(elem, t.left);
             else if (jfr > 0)
                 return find(elem, t.right);
-            else
+            else {
+                // Splay t to root
+
                 return t;
+            }
         }
     }  //   find
+
+    private void splay(Entry t){
+        Entry parent = t.parent;
+        if(parent != null){
+            Entry grandParent = parent.parent;
+            if(grandParent == null){
+                // Zig or Zag
+                if(parent.left == t){
+                    // T left child to parent --> Zag
+                }else{
+                    // T right child to parent --> Zig
+                }
+            }else{
+                if(parent.left == t){
+                    // T left child to parent --> Zag
+                    if(grandParent.left == parent){
+                        // parent left child to grandparent --> ZagZag
+                    }else{
+                        // parent right child to grandparent --> ZagZig
+                    }
+                }else{
+                    // T right child to parent --> Zig
+                    if(grandParent.left == parent){
+                        // parent left child to grandparent --> ZigZag
+                    }else{
+                        // parent right child to grandparent --> ZigZig
+                    }
+                }
+            }
+
+        }
+    }
 
     /* Zigzig
                x'                  z'
