@@ -23,6 +23,10 @@ public class TestSplayTree {
         System.out.println("Before Splaying root\n" + tree.toString());
         tree.testZigZig();
         System.out.println("After Splaying root\n" + tree.toString());
+	    System.out.println("");
+	    System.out.println("Before Splaying root\n" + tree.toString());
+	    tree.testZagZag();
+	    System.out.println("After Splaying root\n" + tree.toString());
     }
 
 }
