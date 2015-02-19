@@ -13,6 +13,22 @@ public class TestSplayTree {
 
     public static void main(String[] args){
         SplayTree<Integer> tree = new SplayTree<>();
+        tree.add(100);
+        tree.add(50);
+        tree.add(1000);
+        tree.add(25);
+        tree.add(75);
+        tree.add(500);
+        tree.add(10000);
+        tree.add(0);
+        tree.add(40);
+        tree.add(60);
+        tree.add(90);
+        tree.add(250);
+        tree.add(750);
+        tree.add(5000);
+        tree.add(250);
+        /*SplayTree<Integer> tree = new SplayTree<>();
         tree.add(10);
         tree.add(100);
         tree.add(1000);
@@ -21,7 +37,7 @@ public class TestSplayTree {
         tree.add(999);
         tree.add(1001);
         System.out.println("Before Splaying root\n" + tree.toString());
-        tree.testZigZig();
+        /*tree.testZigZig();
         System.out.println("After Splaying root\n" + tree.toString());
 	    System.out.println("");
 	    System.out.println("Before Splaying root\n" + tree.toString());
@@ -35,7 +51,7 @@ public class TestSplayTree {
         System.out.println("After Get root\n" + tree.toString());
         System.out.println("Get : " + tree.get(999));
         System.out.println("After Get root\n" + tree.toString());
-        System.out.println();
+        System.out.println();*/
     }
 
 }
