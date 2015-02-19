@@ -5,7 +5,7 @@ import testSortCol.CollectionWithGet;
 /**
  * Author(s): Joakim Berntsson & Tim Kerschbaumer
  * TDA416
- * Group: 57
+ * Group: 6
  * Laboration: 2.1
  * Purpose: A sorted version of a linked collection.
  */
