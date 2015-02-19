@@ -16,6 +16,65 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
         return null;
     }
 
+    protected Entry find(E elem, Entry t) {
+        if (t == null)
+            return null;
+        else {
+            int jfr = elem.compareTo(t.element);
+            if (jfr < 0)
+                return find(elem, t.left);
+            else if (jfr > 0)
+                return find(elem, t.right);
+            else
+                return t;
+        }
+    }  //   find
+
+    /* Zigzig
+               x'                  z'
+              / \                /   \
+             A   y'   -->       y'    D
+                / \            / \
+               B   z'         x'  C
+                  / \        / \
+                 C   D      A   B
+     */
+    private void zigZig(Entry x){
+        Entry y = x.right;
+        Entry z = y.right;
+        // Switch places with z and x
+        E e = x.element;
+        x.element = z.element;
+        z.element = e;
+        // For easier readability
+        Entry tmp = z;
+        z = x;
+        x = tmp;
+        // Switch places with A,B,C,D
+        z.right = x.right;
+        if(x.right != null)
+            x.right.parent = z;
+        y.right = x.left;
+        if(x.left != null)
+            x.left.parent = y;
+        x.right = y.left;
+        if(y.left != null)
+            y.left.parent = x;
+        x.left = z.left;
+        if(z.left != null)
+            z.left.parent = x;
+        // Move y,x to the left side of the tree
+        z.left = y;
+        y.left = x;
+    }
+
+    /**
+     * Testing method for zigZig(Entry x). Should be removed in final version.
+     */
+    public void testZigZig(){
+        zigZig(root);
+    }
+
     /* Rotera 1 steg i h�gervarv, dvs zag
                x'                 y'
               / \                / \
@@ -71,7 +130,7 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
      */
     private void zagZig(Entry x) {
         Entry y = x.left,
-        z = x.left.right;
+                z = x.left.right;
         E e = x.element;
         x.element = z.element;
         z.element = e;
@@ -150,4 +209,28 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 		p.right = g;
 		g.parent = p;
 	}
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        // Include description of the structure
+        sb.append("Structure: Root followed by its right subtree and then its left.\nLevels are divided with double spacing.\n");
+        traverseTree(sb, root, 0);
+        return sb.toString();
+    }
+
+    private void traverseTree(StringBuilder sb, Entry localRoot, int depth){
+        // Add spacing indicating the level the entry is on.
+        for(int i = 0; i < depth; i++)
+            sb.append("  ");
+        // Add the entry's element
+        sb.append(localRoot.element).append("\n");
+
+        // Continue traversing the tree
+        if(localRoot.right != null){
+            traverseTree(sb, localRoot.right, depth + 1);
+        }
+        if(localRoot.left != null){
+            traverseTree(sb, localRoot.left, depth + 1);
+        }
+    }
 }
