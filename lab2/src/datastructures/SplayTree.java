@@ -19,11 +19,6 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 
     @Override
     protected Entry find(E elem, Entry t) {
-	    /*Entry element = super.find(elem, t);
-        if(element != null){
-            splay(element);
-        }
-	    return element != null ? root : null;*/
         Entry tmp;
         if (t == null)
             return null;
@@ -31,19 +26,25 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
             int jfr = elem.compareTo(t.element);
             if (jfr < 0) {
                 if (t.left == null) {
-                    //Splay t
+                    // Splay t
                     splay(t);
+                    return null;
+                }else{
+                    tmp = find(elem, t.left);
                 }
-                tmp = find(elem, t.left);
             }else if (jfr > 0) {
                 if (t.right == null) {
-                    //Splay t
+                    // Splay t
                     splay(t);
+                    return null;
+                }else{
+                    tmp = find(elem, t.right);
                 }
-                tmp = find(elem, t.right);
             }
-            else
+            else {
                 tmp = t;
+                splay(t);
+            }
             return tmp == null ? null : root;
         }
     }
