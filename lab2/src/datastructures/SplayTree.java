@@ -16,7 +16,7 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
         return null;
     }
 
-    /* Rotera 1 steg i h�gervarv, dvs ZAG
+    /* Rotera 1 steg i h�gervarv, dvs ZIG
                x'                 y'
               / \                / \
              y'  C   -->        A   x'
@@ -38,7 +38,7 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
         x.right = y;
     } //   rotateRight
 
-    /* Rotera 1 steg i v�nstervarv, dvs ZIG
+    /* Rotera 1 steg i v�nstervarv, dvs ZAG
                x'                 y'
               / \                / \
              A   y'  -->        x'  C
@@ -60,7 +60,7 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
         x.left = y;
     } //   rotateLeft
 
-    /* Rotera 2 steg i h�gervarv, dvs ZAG ZAG
+    /* Rotera 2 steg i h�gervarv, dvs ZAG ZIG
                x'                  z'
               / \                /   \
              y'  D   -->        y'    x'
@@ -86,12 +86,12 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
         z.parent = x;
     }  //  doubleRotateRight
 
-    /* Rotera 2 steg i v�nstervarv, dvs ZIG ZIG
+    /* Rotera 2 steg i v�nstervarv, dvs ZIG ZAG
                x'                  z'
               / \                /   \
              A   y'   -->       x'    y'
                 / \            / \   / \
-               z   D          A   B C   D
+               z'   D          A   B C   D
               / \
              B   C
      */
