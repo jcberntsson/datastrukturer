@@ -16,14 +16,14 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
         return null;
     }
 
-    /* Rotera 1 steg i h�gervarv, dvs ZIG
+    /* Rotera 1 steg i h�gervarv, dvs zag
                x'                 y'
               / \                / \
              y'  C   -->        A   x'
             / \                    / \
            A   B                  B   C
      */
-    private void rotateRight(Entry x) {
+    private void zag(Entry x) {
         Entry y = x.left;
         E temp = x.element;
         x.element = y.element;
@@ -38,14 +38,14 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
         x.right = y;
     } //   rotateRight
 
-    /* Rotera 1 steg i v�nstervarv, dvs ZAG
+    /* Rotera 1 steg i v�nstervarv, dvs zig
                x'                 y'
               / \                / \
              A   y'  -->        x'  C
                 / \            / \
                B   C          A   B
      */
-    private void rotateLeft(Entry x) {
+    private void zig(Entry x) {
         Entry y = x.right;
         E temp = x.element;
         x.element = y.element;
@@ -69,7 +69,7 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
               / \
              B   C
      */
-    private void doubleRotateRight(Entry x) {
+    private void zagZig(Entry x) {
         Entry y = x.left,
         z = x.left.right;
         E e = x.element;
@@ -95,7 +95,7 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
               / \
              B   C
      */
-    private void doubleRotateLeft(Entry x) {
+    private void zigZag(Entry x) {
         Entry y = x.right,
         z = x.right.left;
         E e = x.element;
