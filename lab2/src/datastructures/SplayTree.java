@@ -33,35 +33,43 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
         }
     }  //   find
 
-    private void splay(Entry t){
+    private void splay(Entry t) {
         Entry parent = t.parent;
-        if(parent != null){
+        if (parent != null) {
             Entry grandParent = parent.parent;
-            if(grandParent == null){
+            if (grandParent == null) {
                 // Zig or Zag
-                if(parent.left == t){
+                if (parent.left == t) {
                     // T left child to parent --> Zag
-                }else{
+                    zag(t);
+                } else {
                     // T right child to parent --> Zig
+                    zig(t);
                 }
-            }else{
-                if(parent.left == t){
+            } else {
+                if (parent.left == t) {
                     // T left child to parent --> Zag
-                    if(grandParent.left == parent){
+                    if (grandParent.left == parent) {
                         // parent left child to grandparent --> ZagZag
-                    }else{
+                        zagZag(t);
+                    } else {
                         // parent right child to grandparent --> ZagZig
+                        zagZig(t);
                     }
-                }else{
+                } else {
                     // T right child to parent --> Zig
-                    if(grandParent.left == parent){
+                    if (grandParent.left == parent) {
                         // parent left child to grandparent --> ZigZag
-                    }else{
+                        zigZag(t);
+                    } else {
                         // parent right child to grandparent --> ZigZig
+                        zigZig(t);
                     }
                 }
             }
-
+        }
+        if(t.parent != null){
+            splay(t);
         }
     }
 
