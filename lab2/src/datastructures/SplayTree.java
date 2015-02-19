@@ -13,12 +13,16 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
 
     @Override
     public E get(E e) {
-        return null;
+        Entry r = find(e, root);
+        return r == null ? null : r.element;
     }
 
+    @Override
     protected Entry find(E elem, Entry t) {
 	    Entry element = super.find(elem, t);
-	    splay(element);
+        if(element != null){
+            splay(element);
+        }
 	    return element;
     }
 
