@@ -27,6 +27,14 @@ public class TestSplayTree {
 	    System.out.println("Before Splaying root\n" + tree.toString());
 	    tree.testZagZag();
 	    System.out.println("After Splaying root\n" + tree.toString());
+        tree.testZag();
+        System.out.println("After Zagging root\n" + tree.toString());
+        System.out.println("Get : " + tree.get(100));
+        System.out.println("After Get root\n" + tree.toString());
+        System.out.println("Get : " + tree.get(9));
+        System.out.println("After Get root\n" + tree.toString());
+        System.out.println("Get : " + tree.get(999));
+        System.out.println("After Get root\n" + tree.toString());
         System.out.println();
     }
 

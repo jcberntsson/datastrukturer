@@ -23,7 +23,7 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
         if(element != null){
             splay(element);
         }
-	    return element;
+	    return element != null ? root : null;
     }
 
     private void splay(Entry t) {
@@ -135,6 +135,10 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
             y.right.parent = y;
         x.right = y;
     } //   rotateRight
+
+    public void testZag(){
+        zag(root);
+    }
 
     /* Rotera 1 steg i v�nstervarv, dvs zig
                x'                 y'
