@@ -27,7 +27,10 @@ public class TestSplayTree {
         tree.add(250);
         tree.add(750);
         tree.add(5000);
-        tree.add(250);
+        tree.add(100000);
+        System.out.println("Before get call\n" + tree.toString());
+        System.out.println("Get 9999" + tree.get(9999));
+        System.out.println("After get call\n" + tree.toString());
         /*SplayTree<Integer> tree = new SplayTree<>();
         tree.add(10);
         tree.add(100);
