@@ -25,9 +25,9 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
         }
 	    return element != null ? root : null;*/
         Entry tmp;
-        if (t == null)
-            return null;
-        else {
+        if (t == null) {
+	        return null;
+        } else {
             int jfr = elem.compareTo(t.element);
             if (jfr < 0) {
                 if (t.left == null) {
@@ -35,15 +35,15 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
                     splay(t);
                 }
                 tmp = find(elem, t.left);
-            }else if (jfr > 0) {
+            } else if (jfr > 0) {
                 if (t.right == null) {
                     //Splay t
                     splay(t);
                 }
                 tmp = find(elem, t.right);
+            } else {
+	            tmp = t;
             }
-            else
-                tmp = t;
             return tmp == null ? null : root;
         }
     }
