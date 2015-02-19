@@ -1,104 +1,100 @@
 package datastructures;
 
 
-import java.util.*; 
+import java.util.NoSuchElementException;
 
 /**
  * Implementation of a stack using a linked structure.
  * All types elements may be stored in the stack.
- * 
- * @author (Bror Bjerner) 
+ *
+ * @author (Bror Bjerner)
  * @version (2007)
  */
 
 public class LinkedStack<E> implements Stacks<E> {
 
-    private int  size;
-    private Node stack;
+	private int size;
+	private Node stack;
 
-    /* The internal node element, that links the elements. */
-    private class Node {
-      
-	E     element;
-        Node  next;
+	/**
+	 * Constructor for elements of class DynamicStack
+	 */
+	public LinkedStack() {
+		stack = null;
+		size = 0;
+	} //  constructor LinkedStack
 
-        public Node( E element,  Node next ) {
-            this.element = element;
-            this.next    = next;
-	}  //  constructor Node
+	/**
+	 * To add an element into the top of the stack
+	 *
+	 * @param elem the element to add to the stack
+	 */
+	public void push(E elem) {
+		stack = new Node(elem, stack);
+		size++;
+	}  //  push
 
-    }  // class Node
+	/**
+	 * Remove the top element from the stack
+	 *
+	 * @return the removed element
+	 * @throws java.util.NoSuchElementException if stack is empty
+	 */
+	public E pop() {
+		try {
+			E res = stack.element;
+			stack = stack.next;
+			size--;
+			return res;
+		} catch (NullPointerException npe) {
+			throw new NoSuchElementException("Stack is empty in pop");
+		}
+	}  //  pop
 
-    /**
-     * Constructor for elements of class DynamicStack
-     */
-    public LinkedStack() {
-	stack = null;
-	size  = 0;
-    } //  constructor LinkedStack
+	/**
+	 * Test whether the stack is empty
+	 *
+	 * @return true if the stack is empty, fals otherwise
+	 */
+	public boolean isEmpty() {
+		return stack == null;
+	}  // isEmpty
 
-    /**
-     * To add an element into the top of the stack 
-     * @param elem the element to add to the stack
-     */
-    public void push(E elem) {
-	stack = new Node(elem, stack);
-	size++;
-    }  //  push
+	/**
+	 * The current number of elements in the stack
+	 *
+	 * @return the number of elements stored in the stack
+	 */
+	public int size() {
+		return size;
+	}  //  size
 
+	/**
+	 * return the elements in FILO order
+	 *
+	 * @return the top element of the stack
+	 * @throws java.util.NoSuchElementException if stack is empty
+	 */
+	public E top() {
+		try {
+			return stack.element;
+		} catch (NullPointerException npe) {
+			throw new NoSuchElementException("Stack is empty in top");
+		}
+	}  // top
 
+	/* The internal node element, that links the elements. */
+	private class Node {
 
+		E element;
+		Node next;
 
+		public Node(E element, Node next) {
+			this.element = element;
+			this.next = next;
+		}  //  constructor Node
 
-
-
-
-    /**
-     * Remove the top element from the stack
-     * @return the removed element
-     * @throws java.util.NoSuchElementException if stack is empty
-     */
-    public E pop() {
-	try {
-	    E res = stack.element;
-	    stack = stack.next;
-	    size--;
-	    return res;
-	}
-	catch(NullPointerException npe ) {
-	    throw new NoSuchElementException("Stack is empty in pop");
-	}
-    }  //  pop
-
-    /**
-     * Test whether the stack is empty
-     * @return  true if the stack is empty, fals otherwise
-     */
-    public boolean isEmpty() {
-	return stack == null;
-    }  // isEmpty
-
-    /**
-     * The current number of elements in the stack
-     * @return  the number of elements stored in the stack
-     */
-    public int size() {
-	return size;
-    }  //  size
-
-    /**
-     * return the elements in FILO order
-     * @return the top element of the stack
-     * @exception java.util.NoSuchElementException if stack is empty
-     */
-    public E top() {
-	try {  
-	    return stack.element;
-	}
-	catch(NullPointerException npe ) {
-	    throw new NoSuchElementException("Stack is empty in top");
-	}
-    }  // top
+	}  // class Node
 
 } // class LinkedStack 
 

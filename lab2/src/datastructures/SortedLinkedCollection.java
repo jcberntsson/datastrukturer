@@ -5,7 +5,7 @@ import testSortCol.CollectionWithGet;
 /**
  * Author(s): Joakim Berntsson & Tim Kerschbaumer
  * TDA416
- * Group: 57
+ * Group: 6
  * Laboration: 2.1
  * Purpose: A sorted version of a linked collection.
  */
@@ -13,6 +13,7 @@ public class SortedLinkedCollection<E extends Comparable<E>> extends LinkedColle
 
 	/**
 	 * Adds the specified element to the collection. The method will use the Comparable compareTo() to place it in order.
+	 *
 	 * @param element the object to add into the list
 	 * @return true if the add was a success, false otherwise
 	 */
