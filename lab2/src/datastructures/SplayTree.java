@@ -111,4 +111,43 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
         x.left = z;
         z.parent = x;
     } //  doubleRotateLeft
+
+	private void zagZag(Entry g) {
+		// X parent
+		Entry p = g.left;
+		// Element that should become root
+		Entry x = g.left.left;
+		// Grandparent/root element
+		E e = g.element;
+		// Switch place between grandparent and X
+		g.element = x.element;
+		x.element = e;
+
+		p.left = g.right;
+		if(p.left != null) {
+			p.left.parent = p;
+		}
+		x.right = x.left;
+		if(x.left != null) {
+			x.left.parent = x;
+		}
+
+		g.right = x.left;
+		if(g.right != null) {
+			g.right.parent = g;
+		}
+
+		x.left = g.left;
+		if(x.left != null) {
+			x.left.parent = x;
+		}
+
+		g.left = p.right;
+		if(g.left != null) {
+			g.left.parent = g;
+		}
+
+		p.right = g;
+		g.parent = p;
+	}
 }
