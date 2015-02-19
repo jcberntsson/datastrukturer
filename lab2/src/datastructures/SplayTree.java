@@ -17,21 +17,10 @@ public class SplayTree<E extends Comparable<? super E>> extends BinarySearchTree
     }
 
     protected Entry find(E elem, Entry t) {
-        if (t == null)
-            return null;
-        else {
-            int jfr = elem.compareTo(t.element);
-            if (jfr < 0)
-                return find(elem, t.left);
-            else if (jfr > 0)
-                return find(elem, t.right);
-            else {
-                // Splay t to root
-
-                return t;
-            }
-        }
-    }  //   find
+	    Entry element = super.find(elem, t);
+	    splay(element);
+	    return element;
+    }
 
     private void splay(Entry t) {
         Entry parent = t.parent;
