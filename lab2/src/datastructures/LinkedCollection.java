@@ -1,7 +1,8 @@
 package datastructures;
 
-import java.util.*;
-
+import java.util.AbstractCollection;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 /**
  * A minimal implementation of a collection
  * as a singly linked list.The elements are
@@ -12,8 +13,7 @@ import java.util.*;
  * @author Bror Bjerner
  * @version (070125)
  */
-public class LinkedCollection<E>
-        extends AbstractCollection<E> {
+public class LinkedCollection<E> extends AbstractCollection<E> {
 
     /**
      * <tt> head </tt> is a referens to the first
@@ -150,8 +150,6 @@ public class LinkedCollection<E>
                 removeAllowed = false;
             } else
                 throw new IllegalStateException();
-        }  //  remove
-
-    }  // class LinkedCollectionIterator
-
+        }  //  remove§
+    }
 } // LinkedCollection
