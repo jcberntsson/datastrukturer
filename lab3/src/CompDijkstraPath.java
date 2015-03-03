@@ -12,7 +12,9 @@ public class CompDijkstraPath<E extends Edge> implements Comparable<CompDijkstra
 	private int node;
 	private double cost;
 	private List<E> path;
-	private static List<Integer> visited = new ArrayList<>();
+
+	// TODO detta ska göras på bättre sätt, ville bara få det att funka
+	private static List<Integer> visited;
 
 	public static void addVisited(int node) {
 		visited.add(node);
@@ -26,6 +28,7 @@ public class CompDijkstraPath<E extends Edge> implements Comparable<CompDijkstra
 		this.node = node;
 		this.cost = cost;
 		this.path = new ArrayList<>();
+		visited = new ArrayList<>();
 	}
 
 	public CompDijkstraPath(final CompDijkstraPath<E> old, E path) {

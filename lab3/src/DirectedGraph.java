@@ -45,7 +45,8 @@ public class DirectedGraph<E extends Edge> {
         // Kruskals
         int nbrOfCC = edges.length;
         DirectedGraph<E> mst = new DirectedGraph<E>(nbrOfCC);
-        PriorityQueue<E> queue = new PriorityQueue<E>(new CompKruskalEdge<Edge>());
+        // PriorityQueue<E> queue = new PriorityQueue<E>(new CompKruskalEdge<Edge>());
+		PriorityQueue<E> queue = new PriorityQueue<>();
         for (List<E> edge : edges) {
             queue.addAll(edge);
         }
