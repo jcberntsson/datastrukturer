@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,11 +7,20 @@ import java.util.List;
  * Date: 15-03-03
  * Time: 16:02
  */
+// TODO behöver skrivas om lite men funkar
 public class CompDijkstraPath<E extends Edge> implements Comparable<CompDijkstraPath<E>> {
 	private int node;
 	private double cost;
 	private List<E> path;
-	private boolean visited = false;
+	private static List<Integer> visited = new ArrayList<>();
+
+	public static void addVisited(int node) {
+		visited.add(node);
+	}
+
+	public static List<Integer> visitedNodes() {
+		return visited;
+	}
 
 	public CompDijkstraPath(int node, double cost) {
 		this.node = node;
@@ -20,10 +28,10 @@ public class CompDijkstraPath<E extends Edge> implements Comparable<CompDijkstra
 		this.path = new ArrayList<>();
 	}
 
-	public CompDijkstraPath(CompDijkstraPath<E> old, E path) {
+	public CompDijkstraPath(final CompDijkstraPath<E> old, E path) {
 		this.node = path.to;
-		this.cost = old.getCost() + cost;
-		this.path = old.getPath();
+		this.cost = old.getCost() + path.getWeight();
+		this.path = new ArrayList<>(old.path);
 		this.path.add(path);
 	}
 
@@ -31,13 +39,6 @@ public class CompDijkstraPath<E extends Edge> implements Comparable<CompDijkstra
 		return path;
 	}
 
-	public void setVisited(boolean visited) {
-		this.visited = visited;
-	}
-
-	public boolean isVisited() {
-		return visited;
-	}
 
 	public double getCost() {
 		return cost;

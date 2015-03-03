@@ -17,37 +17,29 @@ public class DirectedGraph<E extends Edge> {
 		edges[e.from].add(e);
 	}
 
+	// TODO inte direkt optimerad men funkar
 	public Iterator<E> shortestPath(int from, int to) {
-		List<E> shortestPath = null;
 		PriorityQueue<CompDijkstraPath<E>> pq = new PriorityQueue<>();
-		pq.add(new CompDijkstraPath(from, 0));
+		pq.add(new CompDijkstraPath<E>(from, 0));
+
 		while(!pq.isEmpty()) {
 			CompDijkstraPath<E> cdp = pq.poll();
 			int node = cdp.getNode();
-			List<E> path = cdp.getPath();
-			if (!cdp.isVisited()) {
+			if (!CompDijkstraPath.visitedNodes().contains(node)) {
 				if (node == to) {
-					return shortestPath.iterator();
+					return cdp.getPath().iterator();
 				} else {
-					cdp.setVisited(true);
+					CompDijkstraPath.addVisited(node);
 					for (int i = 0; i < edges[node].size(); i++) {
 						E edge = edges[node].get(i);
-						int connectedNode = edge.to;
-						boolean visited = false;
-						for (E e : path) {
-							if (e.to == connectedNode) {
-								visited = true;
-								break;
-							}
-						}
-						if (!visited) {
+						if (!CompDijkstraPath.visitedNodes().contains(edge.to)) {
 							pq.add(new CompDijkstraPath<>(cdp, edge));
 						}
 					}
 				}
 			}
 		}
-		return shortestPath != null ? shortestPath.iterator() : null;
+		return null;
 	}
 
 	public Iterator<E> minimumSpanningTree() {
