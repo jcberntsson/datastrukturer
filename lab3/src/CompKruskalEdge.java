@@ -1,10 +1,11 @@
 import java.util.Comparator;
 
 /**
- * Package: PACKAGE_NAME
- * Author: Joakim
+ * Author(s): Joakim Berntsson & Tim Kerschbaumer
+ * Group: 6
+ * Laboration: 3
  * Date: 2015-03-03 - 16:02
- * Purpose:
+ * Purpose: A Comparator for edges used in a Kruskal algorithm.
  */
 public class CompKruskalEdge<E extends Edge> implements Comparator<E> {
 

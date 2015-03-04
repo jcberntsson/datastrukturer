@@ -1,23 +1,44 @@
-
-import java.lang.reflect.Array;
 import java.util.*;
 
+/**
+ * Author(s): Joakim Berntsson & Tim Kerschbaumer
+ * Group: 6
+ * Laboration: 3
+ * Date: 2015-03-03 - 16:02
+ * Purpose: An implementation of a directed graph.
+ */
 public class DirectedGraph<E extends Edge> {
+    /* An array where each index is a node and contains a list of its edges */
     private List<E>[] edges;
 
+    /**
+     * Constructs a directed graph with the specified number of nodes.
+     * @param nbrOfNodes the number of nodes in the graph
+     */
 	public DirectedGraph(int nbrOfNodes) {
+        // Instantiate the array and fill it with lists.
 		edges = (List<E>[]) new List[nbrOfNodes];
         for(int i = 0; i < edges.length; i++){
             edges[i] = new ArrayList<E>();
         }
 	}
 
+    /**
+     * Add an edge to this graph.
+     * @param e the edge to add
+     */
 	public void addEdge(E e) {
 		edges[e.from].add(e);
 	}
 
-	// TODO inte direkt optimerad men funkar
+    /**
+     * Returns an iterator for the shortest path between the specified nodes in this graph.
+     * @param from the starting node
+     * @param to the ending node
+     * @return an iterator for the shortest path between from and to
+     */
 	public Iterator<E> shortestPath(int from, int to) {
+        // TODO inte direkt optimerad men funkar
 		PriorityQueue<CompDijkstraPath<E>> pq = new PriorityQueue<>();
 		pq.add(new CompDijkstraPath<E>(from, 0));
 
