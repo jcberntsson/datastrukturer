@@ -17,9 +17,4 @@ public class CompKruskalEdge<E extends Edge> implements Comparator<E> {
         else
             return 0;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
 }

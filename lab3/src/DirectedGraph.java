@@ -41,43 +41,48 @@ public class DirectedGraph<E extends Edge> {
 		return null;
 	}
 
+    /**
+     * Returns an iterator for the minimum spanning tree of this graph.
+     * @return an iterator for the MST
+     */
 	public Iterator<E> minimumSpanningTree() {
-        // Kruskals
+        // Number of components
         int nbrOfCC = edges.length;
-        DirectedGraph<E> mst = new DirectedGraph<E>(nbrOfCC);
-        // PriorityQueue<E> queue = new PriorityQueue<E>(new CompKruskalEdge<Edge>());
-		PriorityQueue<E> queue = new PriorityQueue<>();
+        // Using this class to store the MST
+        DirectedGraph<E> mst = new DirectedGraph<>(nbrOfCC);
+        List<E>[] mstEdges = mst.edges;
+        // Create priority queue with a comparator and add all edges to the queue.
+        PriorityQueue<E> queue = new PriorityQueue<>(new CompKruskalEdge<>());
         for (List<E> edge : edges) {
             queue.addAll(edge);
         }
+        // Loop until all components are connected or the queue is empty
         while(nbrOfCC > 1 && !queue.isEmpty()){
             // Find cheapest
             E cheapest = queue.poll();
-            System.out.println(cheapest);
             // Check if no cycle created --> Add to MST
-            if(mst.edges[cheapest.from] != mst.edges[cheapest.to]){
-                // Merge the lists
-                List<E> shortest = mst.edges[cheapest.from];
-                List<E> longest = mst.edges[cheapest.to];
+            if(mstEdges[cheapest.from] != mstEdges[cheapest.to]){
+                // Find the longest of the lists
+                List<E> shortest = mstEdges[cheapest.from];
+                List<E> longest = mstEdges[cheapest.to];
                 if(shortest.size() > longest.size()){
                     List<E> tmp = shortest;
                     shortest = longest;
                     longest = tmp;
                 }
+                // Add the cheapest to the shortest list
+                shortest.add(cheapest);
+                // Merge the shortest into the longest list and link the nodes
                 for(E e : shortest){
                     longest.add(e);
-                }
-                // Add the cheapest
-                longest.add(cheapest);
-                // Link all nodes to the longest list
-                for(E e : longest){
-                    mst.edges[e.from] = longest;
-                    mst.edges[e.to] = longest;
+                    mstEdges[e.from] = longest;
+                    mstEdges[e.to] = longest;
                 }
                 // Decrease number of components
                 nbrOfCC--;
             }
         }
-		return mst.edges[0].iterator();
+        // All nodes should be pointing to the same list, if not the graph wasn't interconnecting from the start.
+		return mstEdges[0].iterator();
 	}
 }
