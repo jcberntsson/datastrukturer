@@ -73,7 +73,8 @@ public class DirectedGraph<E extends Edge> {
         DirectedGraph<E> mst = new DirectedGraph<>(nbrOfCC);
         List<E>[] mstEdges = mst.edges;
         // Create priority queue with a comparator and add all edges to the queue.
-        PriorityQueue<E> queue = new PriorityQueue<>(new CompKruskalEdge<>());
+        // Added initial capacity, because java 1.7 doesn't have the new constructors.
+        PriorityQueue<E> queue = new PriorityQueue<>(11, new CompKruskalEdge<>());
         for (List<E> edge : edges) {
             queue.addAll(edge);
         }
