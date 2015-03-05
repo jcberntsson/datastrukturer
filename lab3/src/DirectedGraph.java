@@ -35,23 +35,29 @@ public class DirectedGraph<E extends Edge> {
      * Returns an iterator for the shortest path between the specified nodes in this graph.
      * @param from the starting node
      * @param to the ending node
-     * @return an iterator for the shortest path between from and to
+     * @return an iterator for the shortest path between from and to or null if no path exists.
      */
 	public Iterator<E> shortestPath(int from, int to) {
-        // TODO inte direkt optimerad men funkar
 		PriorityQueue<CompDijkstraPath<E>> pq = new PriorityQueue<>();
-		pq.add(new CompDijkstraPath<E>(from, 0));
+		// Add the startnode / startPath to the queue
+		pq.add(new CompDijkstraPath<E>(from));
 
 		while(!pq.isEmpty()) {
+			// Get the first element from the queue
 			CompDijkstraPath<E> cdp = pq.poll();
 			int node = cdp.getNode();
+			// Check if this node has been visited
 			if (!CompDijkstraPath.visitedNodes().contains(node)) {
+				// If the node is the ending node, return a iterator for its path.
 				if (node == to) {
 					return cdp.getPath().iterator();
 				} else {
-					CompDijkstraPath.addVisited(node);
+					// Set the node as visited
+					CompDijkstraPath.setVisited(node);
+					// Loop over all connecting edges to this node
 					for (int i = 0; i < edges[node].size(); i++) {
 						E edge = edges[node].get(i);
+						// If node has not been visited add it + old path to the queue
 						if (!CompDijkstraPath.visitedNodes().contains(edge.to)) {
 							pq.add(new CompDijkstraPath<>(cdp, edge));
 						}
